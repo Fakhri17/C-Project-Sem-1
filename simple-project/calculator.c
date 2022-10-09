@@ -22,15 +22,15 @@ int main(){
       break;
    case '-':
       res = num1 - num2;
-      printf("Hasilnya dari %d + %d =  %d",num1, num2, res);
+      printf("Hasilnya dari %d - %d =  %d",num1, num2, res);
       break;
    case '*':
       res = num1 * num2;
-      printf("Hasilnya dari %d + %d =  %d",num1, num2, res);
+      printf("Hasilnya dari %d * %d =  %d",num1, num2, res);
       break;
    case '/':
       res = num1 / num2;
-      printf("Hasilnya dari %d + %d = %d", num1, num2, res);
+      printf("Hasilnya dari %d / %d = %d", num1, num2, res);
       break;
    default:
       printf("Operator tidak ada");
