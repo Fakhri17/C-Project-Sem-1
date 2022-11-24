@@ -8,7 +8,7 @@ int main(){
     printf("Massukan Huruf : ");
     scanf("%c", &huruf);
     getchar();
-  } while (huruf == 'A' || huruf != 'B' && huruf != 'b');
+  } while (huruf == 'A' || huruf != 'B');
 
   printf("perulangan berhenti anda input B");
    
