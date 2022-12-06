@@ -3,18 +3,14 @@
 void HitungCoba(int a, int b, int c){
 
   int lenghtLoop = 0;
-  for (int i = 1; i <= 100; i++)
+  for (int i = a; i <= 100; i = i + a)
   {
-    if (i * a <= 100)
+    if (i % b != 0 && i % c == 0)
     {
-      if (i % b != 0 && i % c == 0)
-      {
-        printf("%d ", i * a);
-        lenghtLoop++;
-      }
+      printf("%d ", i);
+      lenghtLoop++;
     }
   }
-
   printf("\n%d", lenghtLoop);  
 }
 
