@@ -1,0 +1,1 @@
+buatlah funsi main dalam c
