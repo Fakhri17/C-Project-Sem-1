@@ -1,0 +1,23 @@
+Fitur dan Penjelasan sistem program Kereta api
+
+=== Menu Login ===
+1. Admin / petugas
+2. User / pembeli
+3. Keluar
+
+=== Menu admin/petugas ==
+1. Input data Kereta api
+2. Update data kereta api
+3. Hapus data kereta api ( apakah perlu ? )
+4. Liat data data kereta api
+5. cari data kereta api
+6. urutkan data kereta api
+7. Keluar ( keluar program / kembali ke login ?)
+
+
+=== Menu user/pembeli ===
+1. Liat daftar kereta
+2. cari data kereta api
+3. urutkan data kereta api
+4. Pesan Daftar kereta ( liat daftar kereta dan pesan sekaligus dan fitur lainna dari 1-3)
+5. Keluar ( keluar program / kembali ke login ?)
