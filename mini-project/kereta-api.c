@@ -154,6 +154,11 @@ void updateKereta(kereta *listKereta)
       listKereta[i].harga = gantiHarga;
     }
   }
+  printf("\nData telah di update \n");
+  printf("Tekan enter untuk kembali ke menu\n");
+  system("pause");
+  system("cls");
+
 }
 
 void cariDataKereta(kereta *listKereta)
@@ -170,10 +175,10 @@ void cariDataKereta(kereta *listKereta)
   {
     if (strcmp(cariNama, listKereta[i].namaKereta) == 0)
     {
-      printf("Data ditemukan berikut datanya\n");
+      printf("\nData ditemukan berikut datanya\n");
       printf("%s \t %s \t %s\t %d", listKereta[i].namaKereta, listKereta[i].keberangkatan,
              listKereta[i].kelasKereta, listKereta[i].harga);
-      printf("\n");
+      printf("\n\n");
     }
   }
 }
@@ -229,8 +234,9 @@ int main()
   scanf("%d", &pilihanLogin);
   if (pilihanLogin == 1)
   {
-    admin:
     system("cls");
+    admin:
+    
     
     int pilihan;
     
@@ -263,15 +269,15 @@ int main()
       }
       else
         printf("Pilihan tidak ada\n");
-        system("pause");
+        
         goto admin;
 
     } while (pilihan != 6);
   }
   else if (pilihanLogin == 2)
   {
-    user:
     system("cls");
+    user:
     int pilihan;
     
     do
@@ -297,7 +303,7 @@ int main()
       }
       else
         printf("Pilihan tidak ada\n");
-        system("pause");
+       
         goto user;
     } while (pilihan != 5);
   }
