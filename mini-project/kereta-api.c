@@ -302,44 +302,72 @@ int main()
   if (pilihanLogin == 1)
   {
     system("cls");
+    int banyakLogin = 1;
     admin:
-    
-    
+    char username[20];
+    char password[20];
     int pilihan;
-    
-    do
+    printf("Username : ");
+    fflush(stdin);
+    gets(username);
+    printf("Password : ");
+    fflush(stdin);
+    gets(password);
+    if (banyakLogin == 3)
     {
-      printf("Menu Admin\n");
-      printf("1. Input Data Kereta Api\n");
-      printf("2. Update data kereta api\n");
-      printf("3. Liat data data kereta api\n");
-      printf("4. Cari data kereta api\n");
-      printf("5. Urutkan data kereta api\n");
-      printf("6. Keluar\n");
-      printf("Pilih Menu : ");
-      scanf("%d", &pilihan);
-      if (pilihan == 1)
-        inputDataKereta(dataKereta);
-      else if (pilihan == 2)
-        updateKereta(dataKereta);
-      else if (pilihan == 3)
-        tampilKereta(dataKereta);
-      else if (pilihan == 4)
-        cariDataKereta(dataKereta);
-      else if (pilihan == 5)
-        urutKereta(dataKereta);
-      else if (pilihan == 6)
-      {
-        printf("Anda Keluar Menu Admin\n");
-        system("pause");
-        main();
-      }
-      else
-        printf("Pilihan tidak ada\n");
-        
-        goto admin;
+      printf("Anda sudah 3x salah login\n");
+      system("pause");
+      main();
+    }
 
-    } while (pilihan != 6);
+    if (strcmp(username, "admin") == 0 && strcmp(password, "admin") == 0)
+    {
+      system("cls");
+      printf("Login Berhasil\n");
+      menuAdmin:
+      do
+      {
+        printf("Menu Admin\n");
+        printf("1. Input Data Kereta Api\n");
+        printf("2. Update data kereta api\n");
+        printf("3. Liat data data kereta api\n");
+        printf("4. Cari data kereta api\n");
+        printf("5. Urutkan data kereta api\n");
+        printf("6. Keluar\n");
+        printf("Pilih Menu : ");
+        scanf("%d", &pilihan);
+        if (pilihan == 1)
+          inputDataKereta(dataKereta);
+        else if (pilihan == 2)
+          updateKereta(dataKereta);
+        else if (pilihan == 3)
+          tampilKereta(dataKereta);
+        else if (pilihan == 4)
+          cariDataKereta(dataKereta);
+        else if (pilihan == 5)
+          urutKereta(dataKereta);
+        else if (pilihan == 6)
+        {
+          printf("Anda Keluar Menu Admin\n");
+          system("pause");
+          main();
+        }
+        else{
+          printf("Pilihan tidak ada\n");
+          goto menuAdmin;
+        }
+
+      } while (pilihan != 6);
+    }
+    else
+    {
+      printf("Username atau password salah\n");
+      banyakLogin++;
+      goto admin;
+    }
+    
+    
+    
   }
   else if (pilihanLogin == 2)
   {
@@ -372,9 +400,10 @@ int main()
         main();
       }
       else
+      {
         printf("Pilihan tidak ada\n");
-       
         goto user;
+      }
     } while (pilihan != 5);
   }
   else if (pilihanLogin == 3)
