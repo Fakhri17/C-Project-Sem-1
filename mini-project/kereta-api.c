@@ -9,7 +9,8 @@ typedef struct
   int harga;
 } kereta;
 
-kereta dataKereta[3];
+int inputBanyak = 1;
+kereta dataKereta[1];
 
 
 void swap(kereta *A, kereta *B){
@@ -21,7 +22,7 @@ void swap(kereta *A, kereta *B){
 void sortKeretaString(kereta *listKereta, bool isAscending)
 {
   char dummy[20];
-  for (int a = 1; a < 3; a++)
+  for (int a = 1; a < inputBanyak; a++)
   {
     strcpy(dummy, listKereta[a].namaKereta);
     int b = a - 1;
@@ -48,7 +49,7 @@ void sortKeretaString(kereta *listKereta, bool isAscending)
 void sortHargaKereta(kereta *listKereta, bool isAscending)
 {
   int dummy;
-  for (int a = 1; a < 3; a++)
+  for (int a = 1; a < inputBanyak; a++)
   {
     dummy = listKereta[a].harga;
     int b = a - 1;
@@ -75,35 +76,39 @@ void sortHargaKereta(kereta *listKereta, bool isAscending)
 void tampilKereta(kereta *listKereta)
 {
   system("cls");
-  for (int i = 0; i < 3; i++)
+  printf("=== DATA KERETA ===\n");
+  printf("Nama Kereta\tKeberangkatan\tKelas\tHarga\n");
+  for (int i = 0; i < inputBanyak; i++)
   {
-    printf("%s \t %s \t %s \t %d", listKereta[i].namaKereta, listKereta[i].keberangkatan,
-           listKereta[i].kelasKereta, listKereta[i].harga);
-    printf("\n");
+    printf("%s\t\t%s\t\t%s\t\t%d\n", listKereta[i].namaKereta, listKereta[i].keberangkatan, listKereta[i].kelasKereta, listKereta[i].harga);
   }
   printf("\n");
+
 }
 
 void inputDataKereta(kereta *listKereta)
 {
+  
+
   system("cls");
-  for (int i = 0; i < 3; i++)
+  printf("Input Banyak Data Kereta : ");
+  scanf("%d", &inputBanyak);
+  listKereta[inputBanyak];
+  for (int i = 0; i < inputBanyak; i++)
   {
-    printf("Masukkan nama kereta api %d : ", i + 1);
+    printf("Nama Kereta %d : ", i + 1);
     fflush(stdin);
     gets(listKereta[i].namaKereta);
-    printf("Masukkan keberangkatan kereta api %d : ", i + 1);
+    printf("Keberangkatan Kereta %d : ", i + 1);
     fflush(stdin);
     gets(listKereta[i].keberangkatan);
-    printf("Masukkan kelas kereta api %d : ", i + 1);
+    printf("Kelas Kereta %d : ", i + 1);
     fflush(stdin);
     gets(listKereta[i].kelasKereta);
-
-    printf("Masukkan harga %d : ", i + 1);
+    printf("Harga Kereta %d : ", i + 1);
     scanf("%d", &listKereta[i].harga);
-
-    printf("\n");
     getchar();
+    printf("\n");
   }
   printf("\nData telah di inputkan \n");
   printf("Tekan enter untuk kembali ke menu\n");
@@ -118,24 +123,23 @@ void updateKereta(kereta *listKereta)
   system("cls");
   tampilKereta(listKereta);
 
-  char cariNama[20];
-  char gantiNama[20];
-  char gantiTujuan[25];
-  char gantikelas[20];
+  char cariNama[20], gantiNama[20], gantiTujuan[25], gantikelas[20];
   int gantiHarga;
   char dummy[20];
+  bool isFound = false;
+  int temp = 0;
+  
 
   printf("Cari nama kereta : ");
   fflush(stdin);
   gets(cariNama);
   strcpy(dummy, cariNama);
-
-  for (int i = 0; i < 3; i++)
+  for (int i = 0; i < inputBanyak; i++)
   {
-
-    if (strcmp(dummy, listKereta[i].namaKereta) == 0)
+    temp = strcmp(dummy, listKereta[i].namaKereta);
+    if (temp == 0)
     {
-      printf("DATA KERETA DITEMUKAN\n");
+      printf("=== DATA KERETA DITEMUKAN === \n");
       printf("Ganti nama : ");
       fflush(stdin);
       gets(gantiNama);
@@ -152,12 +156,21 @@ void updateKereta(kereta *listKereta)
       strcpy(listKereta[i].keberangkatan, gantiTujuan);
       strcpy(listKereta[i].kelasKereta, gantikelas);
       listKereta[i].harga = gantiHarga;
+      isFound = true;
     }
   }
-  printf("\nData telah di update \n");
-  printf("Tekan enter untuk kembali ke menu\n");
-  system("pause");
-  system("cls");
+  if (!isFound)
+  {
+    printf("DATA TIDAK DITEMUKAN\n\n");
+  }
+  else
+  {
+    printf("DATA BERHASIL DIUBAH\n");
+    printf("Tekan enter untuk kembali ke menu\n");
+    system("pause");
+    system("cls");
+  }
+  
 
 }
 
@@ -167,19 +180,28 @@ void cariDataKereta(kereta *listKereta)
   tampilKereta(listKereta);
 
   char cariNama[20];
+  bool isFound = false;
+  int temp = 0;
 
   printf("Cari data kereta berdasarkan nama : ");
   fflush(stdin);
   gets(cariNama);
-  for (int i = 0; i < 3; i++)
+  for (int i = 0; i < inputBanyak; i++)
   {
-    if (strcmp(cariNama, listKereta[i].namaKereta) == 0)
+    temp = strcmp(cariNama, listKereta[i].namaKereta);
+    if (temp == 0)
     {
-      printf("\nData ditemukan berikut datanya\n");
-      printf("%s \t %s \t %s\t %d", listKereta[i].namaKereta, listKereta[i].keberangkatan,
-             listKereta[i].kelasKereta, listKereta[i].harga);
-      printf("\n\n");
+      printf("=== DATA KERETA DITEMUKAN === \n");
+      printf("Nama Kereta : %s \n", listKereta[i].namaKereta);
+      printf("Keberangkatan : %s \n", listKereta[i].keberangkatan);
+      printf("Kelas Kereta : %s \n", listKereta[i].kelasKereta);
+      printf("Harga : %d \n", listKereta[i].harga);
+      isFound = true;
     }
+  }
+  if (!isFound)
+  {
+    printf("DATA TIDAK DITEMUKAN\n\n");
   }
 }
 
@@ -219,7 +241,9 @@ void urutKereta(kereta *listKereta)
     urutKereta(listKereta);
   }
   printf("\n");
-  printf("Data telah di urutkan\n");
+  
+  tampilKereta(listKereta);
+  printf("=== Data telah di urutkan ===\n");
   printf("Tekan enter untuk kembali ke menu\n");
   system("pause");
   system("cls");
