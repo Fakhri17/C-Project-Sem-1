@@ -3,29 +3,36 @@
 #include <string.h>
 #include <stdbool.h>
 
+
+// Deklarasi struct Kereta
 typedef struct
 {
   char namaKereta[20], keberangkatan[20], kelasKereta[15];
   int harga;
 } kereta;
 
+// Deklarasi struct Penumpang
 typedef struct
 {
   char namaPenumpang[20], kelasPenumpang[15], tujuan[20];
   int biaya;
 } penumpang;
 
+// Deklarasi variabel global
 int inputBanyak = 1;
 kereta dataKereta[1];
 penumpang dataPenumpang;
 
 
+// Deklarasi Prosedur swap
 void swap(kereta *A, kereta *B){
     kereta temp = *A;
     *A = *B;
     *B = temp;
 }
 
+
+// Deklarasi Prosedur untuk mengurutkan data kereta berdasarkan nama kereta
 void sortKeretaString(kereta *listKereta, bool isAscending)
 {
   char dummy[20];
@@ -53,6 +60,7 @@ void sortKeretaString(kereta *listKereta, bool isAscending)
   }
 }
 
+// Deklarasi Prosedur untuk mengurutkan data kereta berdasarkan harga kereta
 void sortHargaKereta(kereta *listKereta, bool isAscending)
 {
   int dummy;
@@ -80,6 +88,7 @@ void sortHargaKereta(kereta *listKereta, bool isAscending)
   }
 }
 
+// Deklarasi Prosedur untuk menampilkan data kereta
 void tampilKereta(kereta *listKereta)
 {
   system("cls");
@@ -100,6 +109,8 @@ void tampilKereta(kereta *listKereta)
 
 }
 
+
+// Deklarasi Prosedur untuk menginput data kereta
 void inputDataKereta(kereta *listKereta)
 {
   
@@ -131,7 +142,7 @@ void inputDataKereta(kereta *listKereta)
 }
 
 
-
+// Deklarasi Prosedur untuk update data kereta
 void updateKereta(kereta *listKereta)
 {
   system("cls");
@@ -193,6 +204,8 @@ void updateKereta(kereta *listKereta)
   }
 }
 
+
+// Deklarasi Prosedur untuk mencari data kereta
 void cariDataKereta(kereta *listKereta)
 {
   system("cls");
@@ -234,6 +247,7 @@ void cariDataKereta(kereta *listKereta)
   
 }
 
+// Deklarasi Prosedur untuk mengurutkan data kereta
 void urutKereta(kereta *listKereta)
 {
   system("cls");
@@ -292,6 +306,8 @@ void pesanTiket(kereta *listKereta){
 
 }
 
+
+// Tampilan utama
 int main()
 {
   int pilihanLogin;
