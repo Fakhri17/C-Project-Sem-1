@@ -33,14 +33,14 @@ void swap(kereta *A, kereta *B)
 // Deklarasi Prosedur untuk mengurutkan data kereta berdasarkan nama kereta
 void sortKeretaString(kereta *listKereta, bool isAscending)
 {
-  char dummy[20];
+  char key[20];
   for (int a = 1; a < inputBanyak; a++)
   {
-    strcpy(dummy, listKereta[a].namaKereta);
+    strcpy(key, listKereta[a].namaKereta);
     int b = a - 1;
     if (isAscending)
     {
-      while (b >= 0 && strcmp(listKereta[b].namaKereta, dummy) > 0)
+      while (b >= 0 && strcmp(listKereta[b].namaKereta, key) > 0)
       {
         swap(&listKereta[b + 1], &listKereta[b]);
         b--;
@@ -48,27 +48,27 @@ void sortKeretaString(kereta *listKereta, bool isAscending)
     }
     else
     {
-      while (b >= 0 && strcmp(listKereta[b].namaKereta, dummy) < 0)
+      while (b >= 0 && strcmp(listKereta[b].namaKereta, key) < 0)
       {
-        swap(&listKereta[b + 1], &listKereta[b]);
+      swap(&listKereta[b + 1], &listKereta[b]);
         b--;
       }
     }
-    strcpy(listKereta[b + 1].namaKereta, dummy);
+    strcpy(listKereta[b + 1].namaKereta, key);
   }
 }
 
 // Deklarasi Prosedur untuk mengurutkan data kereta berdasarkan harga kereta
 void sortHargaKereta(kereta *listKereta, bool isAscending)
 {
-  int dummy;
+  int key;
   for (int a = 1; a < inputBanyak; a++)
   {
-    dummy = listKereta[a].harga;
+    key = listKereta[a].harga;
     int b = a - 1;
     if (isAscending)
     {
-      while (b >= 0 && listKereta[b].harga > dummy)
+      while (b >= 0 && listKereta[b].harga > key)
       {
         swap(&listKereta[b + 1], &listKereta[b]);
         b--;
@@ -76,13 +76,13 @@ void sortHargaKereta(kereta *listKereta, bool isAscending)
     }
     else
     {
-      while (b >= 0 && listKereta[b].harga < dummy)
+      while (b >= 0 && listKereta[b].harga < key)
       {
         swap(&listKereta[b + 1], &listKereta[b]);
         b--;
       }
     }
-    listKereta[b + 1].harga = dummy;
+    listKereta[b + 1].harga = key;
   }
 }
 
@@ -131,8 +131,8 @@ void inputDataKereta(kereta *listKereta)
     printf("\n");
   }
   printf("\nData telah di inputkan \n");
-  printf("Tekan enter untuk kembali ke menu\n");
-  system("pause");
+  printf("Tekan tombol mana saja untuk melanjutkan! :D \n");
+  system("pause > nul");
   system("cls");
 }
 
@@ -190,8 +190,8 @@ void updateKereta(kereta *listKereta)
     else
     {
       printf("DATA BERHASIL DIUBAH\n");
-      printf("Tekan enter untuk kembali ke menu\n");
-      system("pause");
+      printf("Tekan tombol mana saja untuk melanjutkan! :D \n");
+      system("pause > nul");
       system("cls");
     }
   }
@@ -276,20 +276,21 @@ void urutKereta(kereta *listKereta)
     else
     {
       printf("Pilihan tidak ada\n");
-      system("pause");
+      printf("Tekan tombol mana saja untuk melanjutkan! :D \n");
+      system("pause > nul");
       urutKereta(listKereta);
     }
     printf("\n");
 
     tampilKereta(listKereta);
     printf("=== Data telah di urutkan ===\n");
-    printf("Tekan enter untuk kembali ke menu\n");
-    system("pause");
+    printf("Tekan tombol mana saja untuk melanjutkan! :D \n");
+    system("pause > nul");
     system("cls");
   }
 }
 
-void tampilPenumpang(penumpang *listPenumpang,int panjang)
+void tampilPenumpang(penumpang *listPenumpang, int panjang)
 {
   printf("=== DATA PENUMPANG ===\n");
   for (int i = 0; i < panjang; i++)
@@ -303,10 +304,11 @@ void pesanTiket(kereta *listKereta, penumpang *listPenumpang)
 {
   system("cls");
 
-  char namaKereta[20], namaPemesan[20],tanggalberangkat[15],waktuberangkat[5];
-  int hargaKereta,totalHarga,uangBayar, kembalian;
-  bool isfound=false;
-  int temp=0;
+  char namaKereta[20], namaPemesan[20], tanggalberangkat[15], waktuberangkat[5];
+  char dummy[20];
+  int hargaKereta, totalHarga, uangBayar, kembalian;
+  bool isfound = false;
+  int temp = 0;
   if (listKereta[0].harga == 0)
   {
     printf("==== Data kereta tidak ada karena belum di inputkan ====\n\n");
@@ -326,21 +328,11 @@ void pesanTiket(kereta *listKereta, penumpang *listPenumpang)
     printf("Waktu Berangkat : ");
     fflush(stdin);
     gets(waktuberangkat);
-    printf("Jumlah tiket : ");
-    scanf("%d", &jumlahtiket);
-    listPenumpang[jumlahtiket];
-    for (int i = 0; i < jumlahtiket; i++)
-    {
-      printf("Nama Pemesan %d:  ", i + 1);
-      fflush(stdin);
-      gets(namaPemesan);
-      strcpy(listPenumpang[i].namaPenumpang, namaPemesan);
-    }
-    tampilPenumpang(listPenumpang,jumlahtiket);
-    printf(" Data Pemesan Sebagai Berikut : \n");
+   
+
     for (int i = 0; i < inputBanyak; i++)
     {
-     int temp=strcmp(namaKereta,listKereta[i].namaKereta);
+      temp = strcmp(namaKereta, listKereta[i].namaKereta);
       if (temp == 0)
       {
         printf("Nama Kereta : %s \n", listKereta[i].namaKereta);
@@ -348,11 +340,31 @@ void pesanTiket(kereta *listKereta, penumpang *listPenumpang)
         printf("Kelas Kereta : %s \n", listKereta[i].kelasKereta);
         printf("Harga : %d \n", listKereta[i].harga);
         hargaKereta = listKereta[i].harga;
+        // printf("%d", hargaKereta);
       }
     }
+
+    printf("Jumlah tiket : ");
+    scanf("%d", &jumlahtiket);
+    listPenumpang[jumlahtiket];
+   
+    for (int i = 0; i < jumlahtiket; i++)
+    {
+      printf("Nama Pemesan %d:  ", i + 1);
+      fflush(stdin);
+      gets(namaPemesan);
+      strcpy(listPenumpang[i].namaPenumpang, namaPemesan);
+    }
+    tampilPenumpang(listPenumpang, jumlahtiket);
+    
+   
+   
+    // fflush(stdin);
+    // strcpy(dummy, namaKereta);
+    
     totalHarga = hargaKereta * jumlahtiket;
     printf("Total Harga : %d \n", totalHarga);
-  bayar:
+    bayar:
     printf("Uang Bayar : ");
     scanf("%d", &uangBayar);
     if (uangBayar < totalHarga)
@@ -366,7 +378,8 @@ void pesanTiket(kereta *listKereta, penumpang *listPenumpang)
       printf("Kembalian : %d \n", kembalian);
       printf("=== TIKET BERHASIL DIPESAN ===\n");
     }
-    system("pause");
+    printf("Tekan tombol mana saja untuk melanjutkan! :D \n");
+    system("pause > nul");
     system("cls");
   }
 }
@@ -376,7 +389,7 @@ int main()
 {
   int pilihanLogin;
   system("cls");
-  printf("Menu Login\n 1. Admin \n 2. User\n 3. Keluar\n");
+  printf("Menu Login\n 1. Admin \n 2. Pembeli\n 3. Keluar\n");
   printf("Masukkan pilihan : ");
   scanf("%d", &pilihanLogin);
   if (pilihanLogin == 1)
@@ -396,11 +409,12 @@ int main()
     if (banyakLogin == 3)
     {
       printf("Anda sudah 3x salah login\n");
-      system("pause");
+      printf("Tekan tombol mana saja untuk melanjutkan! :D \n");
+      system("pause > nul");
       main();
     }
 
-    if (strcmp(username, "admin") == 0 && strcmp(password, "admin") == 0)
+    if (strcmp(username, "FAB") == 0 && strcmp(password, "kelompok5") == 0)
     {
       system("cls");
       printf("Login Berhasil\n");
@@ -429,7 +443,8 @@ int main()
         else if (pilihan == 6)
         {
           printf("Anda Keluar Menu Admin\n");
-          system("pause");
+          printf("Tekan tombol mana saja untuk melanjutkan! :D \n");
+          system("pause > nul");
           main();
         }
         else
@@ -455,7 +470,7 @@ int main()
 
     do
     {
-      printf("Menu User\n");
+      printf("Menu Pembeli\n");
       printf("1. Liat data data kereta api\n");
       printf("2. Cari data kereta api\n");
       printf("3. Urutkan data kereta api\n");
@@ -473,8 +488,9 @@ int main()
         pesanTiket(dataKereta, dataPenumpang);
       else if (pilihan == 5)
       {
-        printf("Anda Keluar Menu User\n");
-        system("pause");
+        printf("Anda Keluar Menu Pembeli\n");
+        printf("Tekan tombol mana saja untuk melanjutkan! :D \n");
+        system("pause > nul");
         main();
       }
       else
@@ -487,13 +503,15 @@ int main()
   else if (pilihanLogin == 3)
   {
     printf("Anda Keluar Menu\n");
-    system("pause");
+    printf("Tekan tombol mana saja untuk melanjutkan! :D \n");
+    system("pause > nul");
     exit(0);
   }
   else
   {
     printf("Nomer yang anda inputkan tidak ada\n");
-    system("pause");
+    printf("Tekan tombol mana saja untuk melanjutkan! :D \n");
+    system("pause > nul");
     main();
   }
 
