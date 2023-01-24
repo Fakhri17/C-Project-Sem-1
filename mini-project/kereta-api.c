@@ -3,7 +3,6 @@
 #include <string.h>
 #include <stdbool.h>
 
-
 // Deklarasi struct Kereta
 typedef struct
 {
@@ -14,23 +13,22 @@ typedef struct
 // Deklarasi struct Penumpang
 typedef struct
 {
-  char namaPenumpang[20], kelasPenumpang[15], tujuan[20];
-  int biaya;
+  char namaPenumpang[20];
 } penumpang;
 
 // Deklarasi variabel global
 int inputBanyak = 1;
+int jumlahtiket = 1;
 kereta dataKereta[1];
-penumpang dataPenumpang;
-
+penumpang dataPenumpang[1];
 
 // Deklarasi Prosedur swap
-void swap(kereta *A, kereta *B){
-    kereta temp = *A;
-    *A = *B;
-    *B = temp;
+void swap(kereta *A, kereta *B)
+{
+  kereta temp = *A;
+  *A = *B;
+  *B = temp;
 }
-
 
 // Deklarasi Prosedur untuk mengurutkan data kereta berdasarkan nama kereta
 void sortKeretaString(kereta *listKereta, bool isAscending)
@@ -56,7 +54,7 @@ void sortKeretaString(kereta *listKereta, bool isAscending)
         b--;
       }
     }
-    strcpy(listKereta[b + 1].namaKereta, dummy);  
+    strcpy(listKereta[b + 1].namaKereta, dummy);
   }
 }
 
@@ -99,21 +97,18 @@ void tampilKereta(kereta *listKereta)
   else
   {
     printf("=== DATA KERETA ===\n");
-    printf("Nama Kereta\tKeberangkatan\tKelas\tHarga\n");
+    printf("    Nama Kereta     ||   Keberangkatan    ||     Kelas     ||   Harga  ||\n");
     for (int i = 0; i < inputBanyak; i++)
     {
-      printf("%s\t\t%s\t\t%s\t\t%d\n", listKereta[i].namaKereta, listKereta[i].keberangkatan, listKereta[i].kelasKereta, listKereta[i].harga);
+      printf("%20s||%20s||%15s||   %d   ||\n", listKereta[i].namaKereta, listKereta[i].keberangkatan, listKereta[i].kelasKereta, listKereta[i].harga);
     }
     printf("\n");
   }
-
 }
-
 
 // Deklarasi Prosedur untuk menginput data kereta
 void inputDataKereta(kereta *listKereta)
 {
-  
 
   system("cls");
   printf("Input Banyak Data Kereta : ");
@@ -141,7 +136,6 @@ void inputDataKereta(kereta *listKereta)
   system("cls");
 }
 
-
 // Deklarasi Prosedur untuk update data kereta
 void updateKereta(kereta *listKereta)
 {
@@ -159,7 +153,6 @@ void updateKereta(kereta *listKereta)
     char dummy[20];
     bool isFound = false;
     int temp = 0;
-    
 
     printf("Cari nama kereta : ");
     fflush(stdin);
@@ -204,7 +197,6 @@ void updateKereta(kereta *listKereta)
   }
 }
 
-
 // Deklarasi Prosedur untuk mencari data kereta
 void cariDataKereta(kereta *listKereta)
 {
@@ -240,11 +232,8 @@ void cariDataKereta(kereta *listKereta)
     if (!isFound)
     {
       printf("DATA TIDAK DITEMUKAN\n\n");
-
     }
   }
-  
-  
 }
 
 // Deklarasi Prosedur untuk mengurutkan data kereta
@@ -257,7 +246,7 @@ void urutKereta(kereta *listKereta)
   }
   else
   {
-   tampilKereta(listKereta);
+    tampilKereta(listKereta);
 
     int pilih;
     printf("Urutkan berdasarkan : \n");
@@ -268,7 +257,8 @@ void urutKereta(kereta *listKereta)
     printf("Pilih : ");
 
     scanf("%d", &pilih);
-    if(pilih == 1){
+    if (pilih == 1)
+    {
       sortKeretaString(listKereta, true);
     }
     else if (pilih == 2)
@@ -290,22 +280,96 @@ void urutKereta(kereta *listKereta)
       urutKereta(listKereta);
     }
     printf("\n");
-    
+
     tampilKereta(listKereta);
     printf("=== Data telah di urutkan ===\n");
     printf("Tekan enter untuk kembali ke menu\n");
     system("pause");
     system("cls");
   }
-  
-  
-  
 }
 
-void pesanTiket(kereta *listKereta){
-
+void tampilPenumpang(penumpang *listPenumpang,int panjang)
+{
+  printf("=== DATA PENUMPANG ===\n");
+  for (int i = 0; i < panjang; i++)
+  {
+    printf("Nama penumpang %d : %s\n", i + 1, listPenumpang[i].namaPenumpang);
+  }
+  printf("\n");
 }
 
+void pesanTiket(kereta *listKereta, penumpang *listPenumpang)
+{
+  system("cls");
+
+  char namaKereta[20], namaPemesan[20],tanggalberangkat[15],waktuberangkat[5];
+  int hargaKereta,totalHarga,uangBayar, kembalian;
+  bool isfound=false;
+  int temp=0;
+  if (listKereta[0].harga == 0)
+  {
+    printf("==== Data kereta tidak ada karena belum di inputkan ====\n\n");
+  }
+  else
+  {
+
+    printf("=== PESAN TIKET ===\n");
+    tampilKereta(listKereta);
+
+    printf("Pilih kereta : ");
+    fflush(stdin);
+    gets(namaKereta);
+    printf("Tanggal Berangkat : ");
+    fflush(stdin);
+    gets(tanggalberangkat);
+    printf("Waktu Berangkat : ");
+    fflush(stdin);
+    gets(waktuberangkat);
+    printf("Jumlah tiket : ");
+    scanf("%d", &jumlahtiket);
+    listPenumpang[jumlahtiket];
+    for (int i = 0; i < jumlahtiket; i++)
+    {
+      printf("Nama Pemesan %d:  ", i + 1);
+      fflush(stdin);
+      gets(namaPemesan);
+      strcpy(listPenumpang[i].namaPenumpang, namaPemesan);
+    }
+    tampilPenumpang(listPenumpang,jumlahtiket);
+    printf(" Data Pemesan Sebagai Berikut : \n");
+    for (int i = 0; i < inputBanyak; i++)
+    {
+     int temp=strcmp(namaKereta,listKereta[i].namaKereta);
+      if (temp == 0)
+      {
+        printf("Nama Kereta : %s \n", listKereta[i].namaKereta);
+        printf("Keberangkatan : %s \n", listKereta[i].keberangkatan);
+        printf("Kelas Kereta : %s \n", listKereta[i].kelasKereta);
+        printf("Harga : %d \n", listKereta[i].harga);
+        hargaKereta = listKereta[i].harga;
+      }
+    }
+    totalHarga = hargaKereta * jumlahtiket;
+    printf("Total Harga : %d \n", totalHarga);
+  bayar:
+    printf("Uang Bayar : ");
+    scanf("%d", &uangBayar);
+    if (uangBayar < totalHarga)
+    {
+      printf("Uang bayar kurang\n");
+      goto bayar;
+    }
+    else
+    {
+      kembalian = uangBayar - totalHarga;
+      printf("Kembalian : %d \n", kembalian);
+      printf("=== TIKET BERHASIL DIPESAN ===\n");
+    }
+    system("pause");
+    system("cls");
+  }
+}
 
 // Tampilan utama
 int main()
@@ -319,7 +383,7 @@ int main()
   {
     system("cls");
     int banyakLogin = 1;
-    admin:
+  admin:
     char username[20];
     char password[20];
     int pilihan;
@@ -340,7 +404,7 @@ int main()
     {
       system("cls");
       printf("Login Berhasil\n");
-      menuAdmin:
+    menuAdmin:
       do
       {
         printf("Menu Admin\n");
@@ -368,7 +432,8 @@ int main()
           system("pause");
           main();
         }
-        else{
+        else
+        {
           printf("Pilihan tidak ada\n");
           goto menuAdmin;
         }
@@ -381,16 +446,13 @@ int main()
       banyakLogin++;
       goto admin;
     }
-    
-    
-    
   }
   else if (pilihanLogin == 2)
   {
     system("cls");
-    user:
+  user:
     int pilihan;
-    
+
     do
     {
       printf("Menu User\n");
@@ -408,7 +470,7 @@ int main()
       else if (pilihan == 3)
         urutKereta(dataKereta);
       else if (pilihan == 4)
-        pesanTiket(dataKereta);
+        pesanTiket(dataKereta, dataPenumpang);
       else if (pilihan == 5)
       {
         printf("Anda Keluar Menu User\n");
