@@ -17,9 +17,9 @@ typedef struct
 } penumpang;
 
 // Deklarasi variabel global
-int inputBanyak = 1;
+int inputBanyak = 0;
 int jumlahtiket = 1;
-kereta dataKereta[1];
+kereta dataKereta[0];
 penumpang dataPenumpang[1];
 
 // Deklarasi Prosedur swap
@@ -112,27 +112,29 @@ void inputDataKereta(kereta *listKereta)
 {
 
   system("cls");
+  int banyakInput;
   printf("Input Banyak Data Kereta : ");
-  scanf("%d", &inputBanyak);
-  listKereta[inputBanyak];
-  for (int i = 0; i < inputBanyak; i++)
+  scanf("%d", &banyakInput);
+  listKereta[inputBanyak + banyakInput];
+  for (int i = inputBanyak; i < banyakInput + inputBanyak; i++)
   {
-    printf("Nama Kereta %d : ", i + 1);
+    printf("Nama Kereta : ");
     fflush(stdin);
     gets(listKereta[i].namaKereta);
-    printf("Keberangkatan Kereta %d : ", i + 1);
+    printf("Keberangkatan Kereta : ");
     fflush(stdin);
     gets(listKereta[i].keberangkatan);
-    printf("Kelas Kereta %d : ", i + 1);
+    printf("Kelas Kereta : ");
     fflush(stdin);
     gets(listKereta[i].kelasKereta);
-    printf("Jumlah kursi kereta %d :", i + 1);
+    printf("Jumlah kursi kereta : ");
     scanf("%d", &listKereta[i].jumlahkursi);
-    printf("Harga Kereta %d : ", i + 1);
+    printf("Harga Kereta : ");
     scanf("%d", &listKereta[i].harga);
     getchar();
     printf("\n");
   }
+  inputBanyak += banyakInput;
   printf("\nData telah di inputkan \n");
   printf("Tekan tombol mana saja untuk melanjutkan! :D \n");
   system("pause > nul");
