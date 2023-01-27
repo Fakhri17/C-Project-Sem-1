@@ -37,3 +37,16 @@ jam
 tampilKereta
 total harga
 
+input data kereta
+kereta1 kelas 1
+        kelas 2
+        kelas 3
+kereta2  kelas 1
+          kelas 2
+          kelas 3
+jika pilih kelas
+
+NAMA KERETA Kelas
+DHOHO       Ekse
+DHOHO       EKO
+Dhoho       

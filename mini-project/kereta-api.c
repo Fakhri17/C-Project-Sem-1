@@ -7,7 +7,7 @@
 typedef struct
 {
   char namaKereta[20], keberangkatan[20], kelasKereta[15];
-  int harga;
+  int harga, jumlahkursi;
 } kereta;
 
 // Deklarasi struct Penumpang
@@ -50,7 +50,7 @@ void sortKeretaString(kereta *listKereta, bool isAscending)
     {
       while (b >= 0 && strcmp(listKereta[b].namaKereta, key) < 0)
       {
-      swap(&listKereta[b + 1], &listKereta[b]);
+        swap(&listKereta[b + 1], &listKereta[b]);
         b--;
       }
     }
@@ -97,10 +97,11 @@ void tampilKereta(kereta *listKereta)
   else
   {
     printf("=== DATA KERETA ===\n");
-    printf("    Nama Kereta     ||   Keberangkatan    ||     Kelas     ||   Harga  ||\n");
+    printf("    Nama Kereta     ||   Keberangkatan    ||     Kelas   ||   Jumlah Kursi  ||   Harga  ||\n");
     for (int i = 0; i < inputBanyak; i++)
     {
-      printf("%20s||%20s||%15s||   %d   ||\n", listKereta[i].namaKereta, listKereta[i].keberangkatan, listKereta[i].kelasKereta, listKereta[i].harga);
+      printf("%20s||%20s||%15s||     %d     ||     %d     ||\n", listKereta[i].namaKereta, listKereta[i].keberangkatan,
+             listKereta[i].kelasKereta, listKereta[i].jumlahkursi, listKereta[i].harga);
     }
     printf("\n");
   }
@@ -125,6 +126,8 @@ void inputDataKereta(kereta *listKereta)
     printf("Kelas Kereta %d : ", i + 1);
     fflush(stdin);
     gets(listKereta[i].kelasKereta);
+    printf("Jumlah kursi kereta %d :", i + 1);
+    scanf("%d", &listKereta[i].jumlahkursi);
     printf("Harga Kereta %d : ", i + 1);
     scanf("%d", &listKereta[i].harga);
     getchar();
@@ -149,7 +152,7 @@ void updateKereta(kereta *listKereta)
     tampilKereta(listKereta);
 
     char cariNama[20], gantiNama[20], gantiTujuan[25], gantikelas[20];
-    int gantiHarga;
+    int gantiHarga, gantiJumlahKursi;
     char dummy[20];
     bool isFound = false;
     int temp = 0;
@@ -173,12 +176,15 @@ void updateKereta(kereta *listKereta)
         printf("Ganti Kelas :");
         fflush(stdin);
         gets(gantikelas);
+        printf("Ganti Jumlah Kursi : ");
+        scanf("%d", &gantiJumlahKursi);
         printf("Ganti Harga : ");
         scanf("%d", &gantiHarga);
         getchar();
         strcpy(listKereta[i].namaKereta, gantiNama);
         strcpy(listKereta[i].keberangkatan, gantiTujuan);
         strcpy(listKereta[i].kelasKereta, gantikelas);
+        listKereta[i].jumlahkursi = gantiJumlahKursi;
         listKereta[i].harga = gantiHarga;
         isFound = true;
       }
@@ -225,6 +231,7 @@ void cariDataKereta(kereta *listKereta)
         printf("Nama Kereta : %s \n", listKereta[i].namaKereta);
         printf("Keberangkatan : %s \n", listKereta[i].keberangkatan);
         printf("Kelas Kereta : %s \n", listKereta[i].kelasKereta);
+        printf("Jumlah Kursi Kereta : %d \n", listKereta[i].jumlahkursi);
         printf("Harga : %d \n", listKereta[i].harga);
         isFound = true;
       }
@@ -306,7 +313,7 @@ void pesanTiket(kereta *listKereta, penumpang *listPenumpang)
 
   char namaKereta[20], namaPemesan[20], tanggalberangkat[15], waktuberangkat[5];
   char dummy[20];
-  int hargaKereta, totalHarga, uangBayar, kembalian;
+  int hargaKereta, totalHarga, uangBayar, kembalian, jk;
   bool isfound = false;
   int temp = 0;
   if (listKereta[0].harga == 0)
@@ -328,7 +335,6 @@ void pesanTiket(kereta *listKereta, penumpang *listPenumpang)
     printf("Waktu Berangkat : ");
     fflush(stdin);
     gets(waktuberangkat);
-   
 
     for (int i = 0; i < inputBanyak; i++)
     {
@@ -347,7 +353,7 @@ void pesanTiket(kereta *listKereta, penumpang *listPenumpang)
     printf("Jumlah tiket : ");
     scanf("%d", &jumlahtiket);
     listPenumpang[jumlahtiket];
-   
+
     for (int i = 0; i < jumlahtiket; i++)
     {
       printf("Nama Pemesan %d:  ", i + 1);
@@ -356,15 +362,22 @@ void pesanTiket(kereta *listKereta, penumpang *listPenumpang)
       strcpy(listPenumpang[i].namaPenumpang, namaPemesan);
     }
     tampilPenumpang(listPenumpang, jumlahtiket);
-    
-   
-   
+
+    for (int i = 0; i < inputBanyak; i++)
+    {
+      temp = strcmp(namaKereta, listKereta[i].namaKereta);
+      if (temp == 0)
+      {
+        jk = listKereta[i].jumlahkursi - jumlahtiket;
+        listKereta[i].jumlahkursi = jk;
+      }
+    }
     // fflush(stdin);
     // strcpy(dummy, namaKereta);
-    
+
     totalHarga = hargaKereta * jumlahtiket;
     printf("Total Harga : %d \n", totalHarga);
-    bayar:
+  bayar:
     printf("Uang Bayar : ");
     scanf("%d", &uangBayar);
     if (uangBayar < totalHarga)
